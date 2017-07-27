@@ -1,0 +1,9 @@
+[user]
+    name = Siddarth Senthilkumar
+    email = sidsenkumar11@gmail.com
+[color]
+    ui = true
+[core]
+    editor = vim
+[credentials]
+    helper = cached --timeout=9999999999
