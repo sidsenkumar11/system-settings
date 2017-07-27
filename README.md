@@ -10,6 +10,6 @@ cd vagrant/xxx_vm
 ./install.sh
 ```
 ### Other Things to Install
-** Download cmder: http://cmder.net/
-** Turn on Developer Mode in Windows
-** Install Linux Subsystem for Windows
+* Download cmder: http://cmder.net/
+* Turn on Developer Mode in Windows
+* Install Linux Subsystem for Windows
