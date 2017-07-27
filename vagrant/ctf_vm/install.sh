@@ -2,6 +2,8 @@
 # Author  : Sid
 # Purpose : CTF VM Setup Script
 
+set -e # This stops the script if there is an error
+
 # Update Repositories
 sudo apt-get -y update
 sudo apt-get -y upgrade
