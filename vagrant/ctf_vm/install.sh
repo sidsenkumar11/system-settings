@@ -46,6 +46,7 @@ sudo apt-get -y install build-essential
 sudo apt-get -y install git gparted vim
 sudo apt-get -y install tmux screen
 sudo apt-get -y install htop
+sudo apt-get -y install zip unzip rar unrar p7zip-full
 
 # Create folder for holding all git-cloned tools
 cd ~
@@ -99,7 +100,7 @@ sudo -H pip install --upgrade urllib3[secure]
 
 echo ""
 echo "################################################################"
-echo "#################    Pwn / Debugging Tools  ####################"
+echo "##############    Pwn / Debugging / CTF Tools  #################"
 echo "################################################################"
 echo ""
 
@@ -170,22 +171,6 @@ wget -q https://github.com/downloads/0vercl0k/rp/rp-lin-x64
 sudo install -s rp-lin-x64 /usr/bin/rp++
 rm rp-lin-x64
 
-# AFL Fuzzer
-cd ~/tools
-wget http://lcamtuf.coredump.cx/afl/releases/afl-latest.tgz
-tar -zxvf afl-latest.tgz
-pushd afl-*
-make && sudo make install
-popd
-rm afl-latest.tgz
-
-# Install z3 theorem prover
-cd ~/tools
-git clone https://github.com/Z3Prover/z3.git && cd z3
-python scripts/mk_make.py --python
-cd build
-make && sudo make install
-
 # Image Manipulation
 sudo apt-get -y install foremost
 sudo apt-get -y install ipython
@@ -212,27 +197,60 @@ deactivate
 
 echo ""
 echo "################################################################"
+echo "#################  Installing AFL Fuzzer #######################"
+echo "################################################################"
+echo ""
+
+# AFL Fuzzer - This takes a while
+cd ~/tools
+wget http://lcamtuf.coredump.cx/afl/releases/afl-latest.tgz
+tar -zxvf afl-latest.tgz
+pushd afl-*
+make && sudo make install
+popd
+rm afl-latest.tgz
+
+echo ""
+echo "################################################################"
+echo "#################  Installing Z3 Theorem #######################"
+echo "################################################################"
+echo ""
+
+# Install z3 theorem prover - This takes a while
+cd ~/tools
+git clone https://github.com/Z3Prover/z3.git && cd z3
+python scripts/mk_make.py --python
+cd build
+make && sudo make install
+
+echo ""
+echo "################################################################"
 echo "#################   Personal Settings Setup  ###################"
 echo "################################################################"
 echo ""
 
 # Linux utilities
-sudo apt-get -y install tree ranger caca-utils highlight atool w3m poppler-utils mediainfo # The other tools allow file previews in ranger
-sudo apt-get -y install zip unzip rar unrar p7zip-full
+sudo apt-get -y install tree
+sudo apt-get -y install ranger caca-utils highlight atool w3m poppler-utils mediainfo # The other tools allow file previews in ranger
 
 # Install zsh, set as default shell, install oh-my-zsh
 sudo apt-get -y install zsh
 chsh -s $(which zsh)
 sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
-# plugins=(zsh-autosuggestions) # TODO: Might have to be done manually
+# Need to exit zsh shell to continue
+sudo git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
+sudo rm ~/.zshrc
 
 # Personal Config Settings
+# Vim-plug
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 sudo apt-get -y install stow
 cd /home/vagrant
 git clone https://github.com/sidsenkumar11/system-settings.git
 cd system-settings/dotfiles
+chmod u+x install.sh
 ./install.sh
 
 echo ""
@@ -280,3 +298,10 @@ sudo apt-get -y upgrade
 # Cleanup
 sudo apt-get -y autoremove
 sudo apt-get -y autoclean
+
+echo ""
+echo "################################################################"
+echo "########################   Finished!  ##########################"
+echo "########### Remember to call :PlugInstall in Vim! ##############"
+echo "################################################################"
+echo ""
