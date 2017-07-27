@@ -5,14 +5,21 @@
 set -e # This stops the script if there is an error
 
 # Update Repositories
+echo ""
+echo "################################################################"
+echo "#################   Initial Update and Upgrade  ################"
+echo "################################################################"
+echo ""
 sudo apt-get -y update
 sudo apt-get -y upgrade
 # sudo apt-get dist-upgrade -y # Tends to break vagrant build
 
 # 32 Bit Libraries for 64 bit Machines
+echo ""
 echo "################################################################"
 echo "##################   Installing i386 Libraries  ################"
 echo "################################################################"
+echo ""
 sudo dpkg --add-architecture i386
 sudo apt-get -y update
 sudo apt-get -y install libc6:i386 libncurses5:i386 libstdc++6:i386
@@ -23,14 +30,16 @@ sudo apt-get -y install libffi6:i386 libpcre3:i386 libpng12-0:i386 libstdc++6:i3
 sudo apt-get -y install libuuid1:i386 libxau6:i386 libxcb1:i386 libx11-xcb1:i386
 sudo apt-get -y install libdbus-1-3:i386 libxi6:i386 libcurl3:i386 libxdmcp6:i386
 sudo apt-get -y install libxcb1:i386 libxau6:i386
-sudo apt-get -y install libc6-dev-i386 libc6-dbg libc-dbg:i386 
 
 # These are so the 64 bit VM can build 32 bit
 sudo apt-get -y install libx32gcc-4.8-dev
+sudo apt-get -y install libc6-dev-i386 libc6-dbg libc-dbg:i386
 
+echo ""
 echo "################################################################"
 echo "################   Installing Linux Essentials  ################"
 echo "################################################################"
+echo ""
 
 # Essentials
 sudo apt-get -y install build-essential
@@ -40,21 +49,30 @@ sudo apt-get -y install htop
 
 # Create folder for holding all git-cloned tools
 cd ~
-mkdir tools
+mkdir -p tools # -p gives no error if it already exists
 cd tools
 
+echo ""
 echo "################################################################"
 echo "#################    Programming Languages  ####################"
 echo "################################################################"
+echo ""
+
+# Pip
+sudo apt-get -y install python-pip
+sudo apt-get -y install python3-pip
+sudo pip install --upgrade pip
+sudo pip3 install --upgrade pip
 
 # Latest Python 3
 cd ~/tools
 sudo apt-get -y install python3
+sudo apt-get -y install zlib1g-dev
 wget https://www.python.org/ftp/python/3.6.2/Python-3.6.2.tar.xz
 tar xvJf Python-3.6.2.tar.xz
 cd Python-3.6.2
-./configure
-make
+./configure --prefix=/root/Python-3.6.2 --with-zlib=/usr/include
+sudo make
 sudo make install
 
 # Latest Python 2
@@ -63,19 +81,15 @@ sudo apt-get -y install python
 wget https://www.python.org/ftp/python/2.7.9/Python-2.7.9.tar.xz
 tar xvJf Python-2.7.9.tar.xz
 cd Python-2.7.9
-./configure
-make
+./configure --prefix=/root/Python-2.7.9 --with-zlib=/usr/include
+sudo make
 sudo make install
 
 # Java
-sudo apt-get -y install openjdk-8-jre
-sudo apt-get -y install openjdk-8-jdk
-
-# Pip
-sudo apt-get -y install python-pip
-sudo apt-get -y install python3-pip
-sudo pip install --upgrade pip
-sudo pip3 install --upgrade pip3
+# You will need to press Enter to continue installing, then agree to the license in a bit
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get -y install oracle-java8-installer
 
 # Virtualenv
 sudo pip install virtualenv
@@ -83,9 +97,11 @@ sudo pip install virtualenv
 # Fix urllib3 InsecurePlatformWarning
 sudo -H pip install --upgrade urllib3[secure]
 
+echo ""
 echo "################################################################"
 echo "#################    Pwn / Debugging Tools  ####################"
 echo "################################################################"
+echo ""
 
 # Install binutils and binwalk
 cd ~/tools
@@ -118,8 +134,6 @@ echo "source ~/peda/peda.py" >> ~/.gdbinit
 # Pwntools
 sudo apt-get -y install python-dev libssl-dev libffi-dev
 sudo pip install --upgrade pwntools
-# sudo -H pip install --upgrade pip
-# sudo -H pip install --upgrade git+https://github.com/Gallopsled/pwntools
 
 # Angr
 cd ~
@@ -134,13 +148,6 @@ cd ~/tools
 git clone https://github.com/JonathanSalwan/ROPgadget
 cd ROPgadget
 sudo python setup.py install
-
-# Install xrop
-cd ~/tools
-git clone --depth 1 https://github.com/acama/xrop.git
-cd xrop
-git submodule update --init --recursive
-sudo make install
 
 # Install Intel PIN
 cd ~/tools
@@ -191,24 +198,26 @@ cd ~/tools
 git clone https://github.com/Ganapati/RsaCtfTool.git
 cd RsaCtfTool
 git clone https://github.com/hellman/libnum.git
-virtualenv rsatools
-source rsatools/bin/activate
+virtualenv venv
+source venv/bin/activate
 cd libnum
 python setup.py install
 cd ..
 pip install -r requirements.txt
 git clone https://github.com/ius/rsatool.git
 cd rsatool
-python setup.py
+python setup.py install
 cd ..
 deactivate
 
+echo ""
 echo "################################################################"
 echo "#################   Personal Settings Setup  ###################"
 echo "################################################################"
+echo ""
 
 # Linux utilities
-sudo apt-get -y install ranger caca-utils highlight atool w3m poppler-utils mediainfo # The other tools allow file previews in ranger
+sudo apt-get -y install tree ranger caca-utils highlight atool w3m poppler-utils mediainfo # The other tools allow file previews in ranger
 sudo apt-get -y install zip unzip rar unrar p7zip-full
 
 # Install zsh, set as default shell, install oh-my-zsh
@@ -216,21 +225,21 @@ sudo apt-get -y install zsh
 chsh -s $(which zsh)
 sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 # plugins=(zsh-autosuggestions) # TODO: Might have to be done manually
 
 # Personal Config Settings
 sudo apt-get -y install stow
 cd /home/vagrant
-rm .bashrc
 git clone https://github.com/sidsenkumar11/system-settings.git
-cd /varant/ctf_vm
-chmod u+x ./install.sh
+cd system-settings/dotfiles
 ./install.sh
 
+echo ""
 echo "################################################################"
 echo "#############  Installing Miscellaneous Software  ##############"
 echo "################################################################"
+echo ""
 
 # Visual Studio Code
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
@@ -249,9 +258,11 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome*.deb
 sudo apt-get install -f
 
+echo ""
 echo "################################################################"
 echo "#################   Final upgrades and cleanup  ################"
 echo "################################################################"
+echo ""
 
 # Fix locales after installing everything
 sudo locale-gen en_US.UTF-8
