@@ -105,7 +105,7 @@ echo "################################################################"
 echo ""
 
 # QEMU
-sudo apt-get install qemu-kvm qemu virt-manager virt-viewer libvirt-bin
+sudo apt-get -y install qemu-kvm qemu virt-manager virt-viewer libvirt-bin
 
 # Install binutils and binwalk
 cd ~/tools
@@ -189,12 +189,12 @@ git clone https://github.com/hellman/libnum.git
 virtualenv venv
 source venv/bin/activate
 cd libnum
-python setup.py install
+sudo python setup.py install
 cd ..
 sudo -H pip install -r requirements.txt
 git clone https://github.com/ius/rsatool.git
 cd rsatool
-python setup.py install
+sudo python setup.py install
 cd ..
 deactivate
 
