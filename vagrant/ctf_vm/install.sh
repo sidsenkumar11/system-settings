@@ -62,8 +62,8 @@ echo ""
 # Pip
 sudo apt-get -y install python-pip
 sudo apt-get -y install python3-pip
-sudo pip install --upgrade pip
-sudo pip3 install --upgrade pip
+sudo -H pip install --upgrade pip
+sudo -H pip3 install --upgrade pip
 
 # Latest Python 3
 cd ~/tools
@@ -93,7 +93,7 @@ sudo apt-get update
 sudo apt-get -y install oracle-java8-installer
 
 # Virtualenv
-sudo pip install virtualenv
+sudo -H pip install virtualenv
 
 # Fix urllib3 InsecurePlatformWarning
 sudo -H pip install --upgrade urllib3[secure]
@@ -103,6 +103,9 @@ echo "################################################################"
 echo "##############    Pwn / Debugging / CTF Tools  #################"
 echo "################################################################"
 echo ""
+
+# QEMU
+sudo apt-get install qemu-kvm qemu virt-manager virt-viewer libvirt-bin
 
 # Install binutils and binwalk
 cd ~/tools
@@ -134,14 +137,14 @@ echo "source ~/peda/peda.py" >> ~/.gdbinit
 
 # Pwntools
 sudo apt-get -y install python-dev libssl-dev libffi-dev
-sudo pip install --upgrade pwntools
+sudo -H pip install --upgrade pwntools
 
 # Angr
 cd ~
 sudo apt-get -y install virtualenvwrapper
 virtualenv angr
 source angr/bin/activate
-pip install angr --upgrade
+sudo -H pip install angr --upgrade
 deactivate
 
 # Install ROPGadget
@@ -159,7 +162,7 @@ cd pin*
 export PIN_ROOT=$PWD
 export PATH=$PATH:$PIN_ROOT;
 
-#Install ropper 
+# Install ropper
 sudo -H pip install ropper 
 
 # Install golang
@@ -188,7 +191,7 @@ source venv/bin/activate
 cd libnum
 python setup.py install
 cd ..
-pip install -r requirements.txt
+sudo -H pip install -r requirements.txt
 git clone https://github.com/ius/rsatool.git
 cd rsatool
 python setup.py install
@@ -244,10 +247,10 @@ sudo rm ~/.zshrc
 
 # Personal Config Settings
 # Vim-plug
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+sudo curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 sudo apt-get -y install stow
-cd /home/vagrant
+cd /home/vagrant # Only works if there is a vagrant user. If not, replace "vagrant" with username
 git clone https://github.com/sidsenkumar11/system-settings.git
 cd system-settings/dotfiles
 chmod u+x install.sh
@@ -271,7 +274,7 @@ sudo apt-get -y install code # or code-insiders
 sudo update-alternatives --set editor /usr/bin/code
 
 # Google Chrome
-sudo apt-get -y install libxss1 libappindicator1 libindicator7
+sudo apt-get -y install libxss1 libappindicator1 libindicator7 fonts-liberation
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome*.deb
 sudo apt-get install -f

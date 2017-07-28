@@ -10,8 +10,9 @@ Vagrant.configure("2") do |config|
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
 
-  config.vm.provision :shell, :path => "install.sh", :privileged => true
-
+  # Can't automatically run the script because installation of programs
+  # like Java requires pressing "Enter" or other things in the sell
+  # config.vm.provision :shell, :path => "install.sh", :privileged => true
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
