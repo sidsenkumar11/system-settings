@@ -1,0 +1,134 @@
+tmux powerline .conf install
+Other zsh plugins
+Other vim plugins
+Change vim indentLine character - show like VSCode
+Auto insert Git Login into gitconfig - somehow prompt user
+Export/import VSCode plugins and settings
+
+
+
+// Other options
+# QEMU with MIPS/ARM - http://reverseengineering.stackexchange.com/questions/8829/cross-debugging-for-mips-elf-with-qemu-toolchain
+sudo apt-get -y install qemu qemu-user qemu-user-static
+sudo apt-get -y install 'binfmt*'
+sudo apt-get -y install libc6-armhf-armel-cross
+sudo apt-get -y install debian-keyring
+sudo apt-get -y install debian-archive-keyring
+sudo apt-get -y install emdebian-archive-keyring
+tee /etc/apt/sources.list.d/emdebian.list << EOF
+deb http://mirrors.mit.edu/debian squeeze main
+deb http://www.emdebian.org/debian squeeze main
+EOF
+sudo apt-get -y install libc6-mipsel-cross
+sudo apt-get -y install libc6-arm-cross
+mkdir /etc/qemu-binfmt
+ln -s /usr/mipsel-linux-gnu /etc/qemu-binfmt/mipsel
+ln -s /usr/arm-linux-gnueabihf /etc/qemu-binfmt/arm
+rm /etc/apt/sources.list.d/emdebian.list
+
+# Install Firmware-Mod-Kit
+sudo apt-get -y install git build-essential zlib1g-dev liblzma-dev python-magic
+cd ~/tools
+wget https://firmware-mod-kit.googlecode.com/files/fmk_099.tar.gz
+tar xvf fmk_099.tar.gz
+rm fmk_099.tar.gz
+cd fmk_099/src
+./configure
+make
+
+# fzf
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+
+## GDB Tools
+# Install peda
+git clone https://github.com/longld/peda.git
+# Install pwndbg
+git clone https://github.com/zachriggle/pwndbg
+# Install gef
+git clone https://github.com/hugsy/gef.git
+# Install voltron
+git clone https://github.com/snare/voltron.git
+pushd voltron
+./install.sh
+popd
+
+# Install pwndbg
+git clone https://github.com/zachriggle/pwndbg
+echo source `pwd`/pwndbg/gdbinit.py >> ~/.gdbinit
+
+# Capstone for pwndbg
+git clone https://github.com/aquynh/capstone
+cd capstone
+git checkout -t origin/next
+sudo ./make.sh install
+cd bindings/python
+sudo python3 setup.py install # Ubuntu 14.04+, GDB uses Python3
+
+# pycparser for pwndbg
+sudo pip3 install pycparser # Use pip3 for Python3
+
+# Uninstall capstone
+sudo pip2 uninstall capstone -y
+
+# Install correct capstone
+pushd capstone/bindings/python
+sudo python setup.py install
+popd
+
+sudo apt-get -y install clang llvm
+
+# Enable ptracing
+sudo sed -i 's/kernel.yama.ptrace_scope = 1/kernel.yama.ptrace_scope = 0/g' /etc/sysctl.d/10-ptrace.conf
+sudo sysctl --system
+
+# Install Keystone engine with debug option
+cd ~/tools
+sudo apt-get -y install cmake
+git clone https://github.com/keystone-engine/keystone.git
+cd keystone
+mkdir build
+cd build
+../make-share.sh debug
+sudo make install
+cd ../bindings/python/
+sudo python setup.py install
+sudo ldconfig
+
+#install qira timeless debugger
+cd ~/tools 
+wget -q https://github.com/BinaryAnalysisPlatform/qira/archive/v1.2.tar.gz
+tar zxvf v1.2.tar.gz 
+rm v1.2.tar.gz 
+cd qira-1.2 
+./install.sh
+
+# Install american-fuzzy-lop
+cd ~/tools
+wget --quiet http://lcamtuf.coredump.cx/afl/releases/afl-latest.tgz
+tar -xzvf afl-latest.tgz
+rm afl-latest.tgz
+wget --quiet http://llvm.org/releases/3.8.0/clang+llvm-3.8.0-x86_64-linux-gnu-ubuntu-14.04.tar.xz
+xz -d clang*
+tar xvf clang*
+cd clang*
+cd bin
+export PATH=$PWD:$PATH
+cd ../..
+(
+  cd afl-*
+  make
+  # build clang-fast
+  (
+    cd llvm_mode
+    make
+  )
+  sudo make install
+
+  # build qemu-support
+  sudo apt-get -y install libtool automake bison libglib2.0-dev
+  ./build_qemu_support.sh
+)
+
+# Install frida
+sudo -H pip install --upgrade frida

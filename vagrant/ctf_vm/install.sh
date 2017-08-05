@@ -17,7 +17,7 @@ sudo apt-get -y upgrade
 
 # Allow add-apt-repository command and to download over https
 sudo apt-get -y install software-properties-common python-software-properties
-sudo apt-get install apt-transport-https
+sudo apt-get -y install apt-transport-https
 
 # Ensure all sudo installed files can be read even without sudo
 umask 022
@@ -151,7 +151,7 @@ git clone https://github.com/longld/peda.git ~/peda
 echo "source ~/peda/peda.py # For PEDA" >> ~/.gdbinit
 
 # Install GEF
-sudo apt-get install python-capstone # Just installing capstone gives error when importing
+sudo apt-get -y install python-capstone # Just installing capstone gives error when importing, need this too
 sudo -H pip3 install capstone unicorn keystone-engine ropper retdec-python
 # wget -q -O- https://github.com/hugsy/gef/raw/master/gef.sh | sh
 
@@ -200,15 +200,18 @@ sudo apt-get -y install vlc gimp
 # RSA CTF Tool
 sudo apt-get -y install libgmp3-dev
 cd ~/tools
+mkdir rsa
+cd rsa
+virtualenv venv
+source venv/bin/activate
 git clone https://github.com/Ganapati/RsaCtfTool.git
 cd RsaCtfTool
 git clone https://github.com/hellman/libnum.git
-virtualenv venv
-source venv/bin/activate
 cd libnum
 python setup.py install
 cd ..
 pip install -r requirements.txt
+cd ..
 git clone https://github.com/ius/rsatool.git
 cd rsatool
 python setup.py install
@@ -253,31 +256,34 @@ echo ""
 sudo apt-get -y install tree
 sudo apt-get -y install ranger caca-utils highlight atool w3m poppler-utils mediainfo # The other tools allow file previews in ranger
 
-# Install zsh, set as default shell, install oh-my-zsh
+# Install zsh, set as default shell, then install oh-my-zsh
 sudo apt-get -y install zsh
 chsh -s $(which zsh)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # Need to exit zsh shell to continue
 ZSH_CUSTOM="/home/vagrant/.oh-my-zsh/custom"
+
+# Zsh Plugins
 git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
+
+# Zsh Zeta theme
+mkdir $ZSH_CUSTOM/themes
+cd $ZSH_CUSTOM/themes
+wget https://raw.githubusercontent.com/skylerlee/zeta-zsh-theme/master/zeta.zsh-theme
+
 sudo rm ~/.zshrc
 
-# Personal Config Settings
 # Vim-plug
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+# Personal Config Settings
 sudo apt-get -y install stow
 cd /home/vagrant # Only works if there is a vagrant user. If not, replace "vagrant" with username
 git clone https://github.com/sidsenkumar11/system-settings.git
 cd system-settings/dotfiles
 chmod u+x install.sh
 ./install.sh
-
-# Get Zeta theme
-mkdir $ZSH_CUSTOM/themes
-cd $ZSH_CUSTOM/themes
-wget https://raw.githubusercontent.com/skylerlee/zeta-zsh-theme/master/zeta.zsh-theme
 
 # Install Vim Plugins
 vim -c "PlugInstall"
@@ -294,7 +300,7 @@ sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
 sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
 sudo apt-get -y update
 sudo apt-get -y install code # or code-insiders
-# TODO: Export VSCode settings and import
+# TODO: Export VSCode settings/plugins and import
 
 # Set Visual Studio Code as default text editor
 sudo update-alternatives --set editor /usr/bin/code
