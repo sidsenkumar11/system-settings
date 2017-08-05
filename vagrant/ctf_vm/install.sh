@@ -279,6 +279,9 @@ mkdir $ZSH_CUSTOM/themes
 cd $ZSH_CUSTOM/themes
 wget https://raw.githubusercontent.com/skylerlee/zeta-zsh-theme/master/zeta.zsh-theme
 
+# Install Vim Plugins
+vim -c "PlugInstall"
+
 echo ""
 echo "################################################################"
 echo "#############  Installing Miscellaneous Software  ##############"
@@ -328,6 +331,5 @@ sudo apt-get -y autoclean
 echo ""
 echo "################################################################"
 echo "########################   Finished!  ##########################"
-echo "########### Remember to call :PlugInstall in Vim! ##############"
 echo "################################################################"
 echo ""
