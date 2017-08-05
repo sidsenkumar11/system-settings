@@ -8,7 +8,8 @@ Plug 'tpope/vim-surround'
 Plug 'easymotion/vim-easymotion'
 Plug 'sjl/badwolf'
 Plug 'vim-airline/vim-airline'
-Plug 'nathanaelkane/vim-indent-guides'
+Plug 'Yggdroot/indentLine'
+" Plug 'nathanaelkane/vim-indent-guides'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
 " On-demand loading
@@ -17,7 +18,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 " Initialize plugin system
 call plug#end()
 
-&runtimepath
+" &runtimepath
 set laststatus=2
 
 set number
@@ -29,7 +30,9 @@ set t_Co=256
 " vim-airline settings
 let g:airline_powerline_fonts = 1
 
-" vim-indent-guides plugin settings
-let g:indent_guides_guide_size = 1
-let g:indent_guides_color_change_percent = 3
-let g:indent_guides_enable_on_vim_startup = 1
+" YouCompleteMe
+set encoding=utf-8
+
+" Indent Lines
+let g:indentLine_char = '┆'
+" let g:indentLine_char = '¦'

@@ -15,8 +15,9 @@ sudo apt-get -y update
 sudo apt-get -y upgrade
 # sudo apt-get dist-upgrade -y # Tends to break vagrant build
 
-# Allow add-apt-repository command
+# Allow add-apt-repository command and to download over https
 sudo apt-get -y install software-properties-common python-software-properties
+sudo apt-get install apt-transport-https
 
 # Ensure all sudo installed files can be read even without sudo
 umask 022
@@ -150,6 +151,7 @@ git clone https://github.com/longld/peda.git ~/peda
 echo "source ~/peda/peda.py # For PEDA" >> ~/.gdbinit
 
 # Install GEF
+sudo apt-get install python-capstone # Just installing capstone gives error when importing
 sudo -H pip3 install capstone unicorn keystone-engine ropper retdec-python
 # wget -q -O- https://github.com/hugsy/gef/raw/master/gef.sh | sh
 
@@ -254,10 +256,11 @@ sudo apt-get -y install ranger caca-utils highlight atool w3m poppler-utils medi
 # Install zsh, set as default shell, install oh-my-zsh
 sudo apt-get -y install zsh
 chsh -s $(which zsh)
-sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # Need to exit zsh shell to continue
-sudo git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
+ZSH_CUSTOM="/home/vagrant/.oh-my-zsh/custom"
+git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 sudo rm ~/.zshrc
 
 # Personal Config Settings
@@ -270,6 +273,11 @@ git clone https://github.com/sidsenkumar11/system-settings.git
 cd system-settings/dotfiles
 chmod u+x install.sh
 ./install.sh
+
+# Get Zeta theme
+mkdir $ZSH_CUSTOM/themes
+cd $ZSH_CUSTOM/themes
+wget https://raw.githubusercontent.com/skylerlee/zeta-zsh-theme/master/zeta.zsh-theme
 
 echo ""
 echo "################################################################"
