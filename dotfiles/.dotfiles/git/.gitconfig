@@ -7,3 +7,5 @@
     editor = vim
 [credentials]
     helper = cached --timeout=9999999999
+[push]
+    default = simple
