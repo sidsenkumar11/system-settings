@@ -1,6 +1,6 @@
 #!/bin/bash
 # Author  : Sid
-# Purpose : CTF VM Setup Script
+# Purpose : 64-Bit CTF VM Setup Script
 
 set -e # This stops the script if there is an error
 
@@ -10,9 +10,17 @@ echo "################################################################"
 echo "#################   Initial Update and Upgrade  ################"
 echo "################################################################"
 echo ""
+
 sudo apt-get -y update
 sudo apt-get -y upgrade
 # sudo apt-get dist-upgrade -y # Tends to break vagrant build
+
+# Allow add-apt-repository command
+sudo apt-get -y install software-properties-common python-software-properties
+
+# Ensure all sudo installed files can be read even without sudo
+umask 022
+echo -e "\n# Allow all users to read files but only user to write\numask 022" >> ~/.bashrc
 
 # 32 Bit Libraries for 64 bit Machines
 echo ""
@@ -26,10 +34,11 @@ sudo apt-get -y install libc6:i386 libncurses5:i386 libstdc++6:i386
 sudo apt-get -y install libgcc1:i386 zlib1g:i386 libglib2.0-0:i386 libfreetype6:i386
 sudo apt-get -y install libsm6:i386 libice6:i386 libxrender1:i386 libfontconfig1:i386
 sudo apt-get -y install libxext6:i386 libx11-6:i386 libc6-i686:i386 libexpat1:i386
-sudo apt-get -y install libffi6:i386 libpcre3:i386 libpng12-0:i386 libstdc++6:i386
+sudo apt-get -y install libffi6:i386 libpcre3:i386 libstdc++6:i386
 sudo apt-get -y install libuuid1:i386 libxau6:i386 libxcb1:i386 libx11-xcb1:i386
 sudo apt-get -y install libdbus-1-3:i386 libxi6:i386 libcurl3:i386 libxdmcp6:i386
 sudo apt-get -y install libxcb1:i386 libxau6:i386
+# Errors: libpng12-0:i386 
 
 # These are so the 64 bit VM can build 32 bit
 sudo apt-get -y install libx32gcc-4.8-dev
@@ -47,6 +56,7 @@ sudo apt-get -y install git gparted vim
 sudo apt-get -y install tmux screen
 sudo apt-get -y install htop
 sudo apt-get -y install zip unzip rar unrar p7zip-full
+sudo apt-get -y install man cmake
 
 # Create folder for holding all git-cloned tools
 cd ~
@@ -65,26 +75,30 @@ sudo apt-get -y install python3-pip
 sudo -H pip install --upgrade pip
 sudo -H pip3 install --upgrade pip
 
-# Latest Python 3
-cd ~/tools
-sudo apt-get -y install python3
-sudo apt-get -y install zlib1g-dev
-wget https://www.python.org/ftp/python/3.6.2/Python-3.6.2.tar.xz
-tar xvJf Python-3.6.2.tar.xz
-cd Python-3.6.2
-./configure --prefix=/root/Python-3.6.2 --with-zlib=/usr/include
-sudo make
-sudo make install
+# Ensures pip -> pip2 -> python2 and pip3 -> python3
+sudo -H python3 -m pip install -U --force-reinstall pip
+sudo -H python -m pip install -U --force-reinstall pip
 
-# Latest Python 2
-cd ~/tools
-sudo apt-get -y install python
-wget https://www.python.org/ftp/python/2.7.9/Python-2.7.9.tar.xz
-tar xvJf Python-2.7.9.tar.xz
-cd Python-2.7.9
-./configure --prefix=/root/Python-2.7.9 --with-zlib=/usr/include
-sudo make
-sudo make install
+# # Latest Python 3
+# cd ~/tools
+# sudo apt-get -y install python3
+# sudo apt-get -y install zlib1g-dev
+# wget https://www.python.org/ftp/python/3.6.2/Python-3.6.2.tar.xz
+# tar xvJf Python-3.6.2.tar.xz
+# cd Python-3.6.2
+# ./configure --prefix=/root/Python-3.6.2 --with-zlib=/usr/include
+# sudo make
+# sudo make install
+
+# # Latest Python 2
+# cd ~/tools
+# sudo apt-get -y install python
+# wget https://www.python.org/ftp/python/2.7.9/Python-2.7.9.tar.xz
+# tar xvJf Python-2.7.9.tar.xz
+# cd Python-2.7.9
+# ./configure --prefix=/root/Python-2.7.9 --with-zlib=/usr/include
+# sudo make
+# sudo make install
 
 # Java
 # You will need to press Enter to continue installing, then agree to the license in a bit
@@ -133,7 +147,11 @@ echo 'set auto-load safe-path /' > ~/.gdbinit # Fix warning when loading .gdbini
 
 # Install Peda 
 git clone https://github.com/longld/peda.git ~/peda
-echo "source ~/peda/peda.py" >> ~/.gdbinit
+echo "source ~/peda/peda.py # For PEDA" >> ~/.gdbinit
+
+# Install GEF
+sudo -H pip3 install capstone unicorn keystone-engine ropper retdec-python
+# wget -q -O- https://github.com/hugsy/gef/raw/master/gef.sh | sh
 
 # Pwntools
 sudo apt-get -y install python-dev libssl-dev libffi-dev
@@ -144,7 +162,7 @@ cd ~
 sudo apt-get -y install virtualenvwrapper
 virtualenv angr
 source angr/bin/activate
-sudo -H pip install angr --upgrade
+pip install angr --upgrade
 deactivate
 
 # Install ROPGadget
@@ -161,9 +179,6 @@ rm pin-2.14-71313-gcc.4.4.7-linux.tar.gz
 cd pin*
 export PIN_ROOT=$PWD
 export PATH=$PATH:$PIN_ROOT;
-
-# Install ropper
-sudo -H pip install ropper 
 
 # Install golang
 sudo apt-get -y install golang 
@@ -189,13 +204,14 @@ git clone https://github.com/hellman/libnum.git
 virtualenv venv
 source venv/bin/activate
 cd libnum
-sudo python setup.py install
+python setup.py install
 cd ..
-sudo -H pip install -r requirements.txt
+pip install -r requirements.txt
 git clone https://github.com/ius/rsatool.git
 cd rsatool
-sudo python setup.py install
+python setup.py install
 cd ..
+pip install sympy
 deactivate
 
 echo ""
@@ -204,27 +220,26 @@ echo "#################  Installing AFL Fuzzer #######################"
 echo "################################################################"
 echo ""
 
-# AFL Fuzzer - This takes a while
 cd ~/tools
 wget http://lcamtuf.coredump.cx/afl/releases/afl-latest.tgz
 tar -zxvf afl-latest.tgz
-pushd afl-*
+cd afl-*
 make && sudo make install
-popd
+cd ..
 rm afl-latest.tgz
 
-echo ""
-echo "################################################################"
-echo "#################  Installing Z3 Theorem #######################"
-echo "################################################################"
-echo ""
+# echo ""
+# echo "################################################################"
+# echo "#################  Installing Z3 Theorem #######################"
+# echo "################################################################"
+# echo ""
 
-# Install z3 theorem prover - This takes a while
-cd ~/tools
-git clone https://github.com/Z3Prover/z3.git && cd z3
-python scripts/mk_make.py --python
-cd build
-make && sudo make install
+# # This takes a while
+# cd ~/tools
+# git clone https://github.com/Z3Prover/z3.git && cd z3
+# python scripts/mk_make.py --python
+# cd build
+# make && sudo make install
 
 echo ""
 echo "################################################################"
@@ -247,7 +262,7 @@ sudo rm ~/.zshrc
 
 # Personal Config Settings
 # Vim-plug
-sudo curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 sudo apt-get -y install stow
 cd /home/vagrant # Only works if there is a vagrant user. If not, replace "vagrant" with username
