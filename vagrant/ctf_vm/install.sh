@@ -148,7 +148,7 @@ echo 'set auto-load safe-path /' > ~/.gdbinit # Fix warning when loading .gdbini
 
 # Install Peda 
 git clone https://github.com/longld/peda.git ~/peda
-echo "source ~/peda/peda.py # For PEDA" >> ~/.gdbinit
+echo "source ~/peda/peda.py" >> ~/.gdbinit
 
 # Install GEF
 sudo apt-get -y install python-capstone # Just installing capstone gives error when importing, need this too
