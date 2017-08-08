@@ -217,6 +217,10 @@ cd rsatool
 python setup.py install
 cd ..
 pip install sympy
+git clone https://github.com/rk700/attackrsa.git
+cd attackrsa
+python setup.py install
+cd ..
 deactivate
 
 echo ""
