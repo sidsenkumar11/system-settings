@@ -39,7 +39,7 @@ sudo apt-get -y install libffi6:i386 libpcre3:i386 libstdc++6:i386
 sudo apt-get -y install libuuid1:i386 libxau6:i386 libxcb1:i386 libx11-xcb1:i386
 sudo apt-get -y install libdbus-1-3:i386 libxi6:i386 libcurl3:i386 libxdmcp6:i386
 sudo apt-get -y install libxcb1:i386 libxau6:i386
-# Errors: libpng12-0:i386 
+# Errors: libpng12-0:i386
 
 # These are so the 64 bit VM can build 32 bit
 sudo apt-get -y install libx32gcc-4.8-dev
@@ -146,7 +146,7 @@ sudo apt-get -y install valgrind
 sudo apt-get -y install gcc-arm-linux-gnueabihf
 echo 'set auto-load safe-path /' > ~/.gdbinit # Fix warning when loading .gdbinit files
 
-# Install Peda 
+# Install Peda
 git clone https://github.com/longld/peda.git ~/peda
 echo "source ~/peda/peda.py" >> ~/.gdbinit
 
@@ -183,7 +183,7 @@ export PIN_ROOT=$PWD
 export PATH=$PATH:$PIN_ROOT;
 
 # Install golang
-sudo apt-get -y install golang 
+sudo apt-get -y install golang
 
 # Install rp++
 cd ~/tools
@@ -292,6 +292,9 @@ chmod u+x install.sh
 
 # Install Vim Plugins
 vim -c "PlugInstall"
+
+# Install tmux powerline theme
+pip install git+git://github.com/Lokaltog/powerline
 
 echo ""
 echo "################################################################"
