@@ -294,7 +294,7 @@ chmod u+x install.sh
 vim -c "PlugInstall"
 
 # Install tmux powerline theme
-pip install git+git://github.com/Lokaltog/powerline
+sudo -H pip install git+git://github.com/Lokaltog/powerline
 
 echo ""
 echo "################################################################"
