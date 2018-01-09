@@ -9,6 +9,7 @@ echo ""
 echo "################################################################"
 echo "#################   Initial Update and Upgrade  ################"
 echo "################################################################"
+echo " !!! REMEMBER TO CHANGE "vagrant" TO YOUR USERNAME !!!"
 echo ""
 
 sudo apt-get -y update
@@ -284,7 +285,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.c
 
 # Personal Config Settings
 sudo apt-get -y install stow
-cd /home/vagrant # Only works if there is a vagrant user. If not, replace "vagrant" with username
+cd $HOME
 git clone https://github.com/sidsenkumar11/system-settings.git
 cd system-settings/dotfiles
 chmod u+x install.sh
