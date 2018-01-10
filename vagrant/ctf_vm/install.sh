@@ -59,6 +59,7 @@ sudo apt-get -y install tmux screen
 sudo apt-get -y install htop
 sudo apt-get -y install zip unzip rar unrar p7zip-full
 sudo apt-get -y install man cmake
+sudo apt-get -y install autoconf autogen libtool nasm
 
 # Create folder for holding all git-cloned tools
 cd ~
