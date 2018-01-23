@@ -2,7 +2,7 @@
 
 ### Installation
 ```
-sudo sudo apt-get -y install stow
+sudo apt-get -y install stow
 cd /home/vagrant
 rm .bashrc
 git clone https://github.com/sidsenkumar11/system-settings
