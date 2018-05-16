@@ -3,21 +3,29 @@
 # Purpose : 64-Bit Ubuntu VM Setup Script
 # Date    : 05/15/2018
 
+USERNAME=""
 if [ $# == 0 ]
 then
 	echo "Need argument to execute"
 	echo "vagrant    : Installing on a vagrant box"
-	echo "windows    : Installing on Windows Linux Subsystem"
 	echo "<username> : Installing on a normal VM"
+	echo "windows <username> : Installing on Windows Linux Subsystem."
+	exit
+elif [[ $1 == "windows" && $# == 1 ]]
+then
+	echo "Windows must be followed by username on this system."
 	exit
 elif [ $1 == "vagrant" ]
 then
 	echo "Executing as if installing on vagrant machine"
+	USERNAME="$1"
 elif [ $1 == "windows" ]
 then
 	echo "Executing as if installing on Windows Linux subsystem"
+	USERNAME="$2"
 else
 	echo "Executing as if installing on a normal VM"
+	USERNAME="$1"
 fi
 
 set -e # This stops the script if there is an error
@@ -342,14 +350,14 @@ chsh -s $(which zsh)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # Need to exit zsh shell to continue
-ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
+ZSH_CUSTOM="$USERNAME/.oh-my-zsh/custom"
 
 # Zsh Plugins
 git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 # Zsh Zeta theme
-mkdir $ZSH_CUSTOM/themes
+mkdir -p $ZSH_CUSTOM/themes
 cd $ZSH_CUSTOM/themes
 wget https://raw.githubusercontent.com/skylerlee/zeta-zsh-theme/master/zeta.zsh-theme
 
@@ -360,10 +368,11 @@ sudo rm ~/.zshrc
 sudo apt-get -y install stow
 git clone https://github.com/sidsenkumar11/system-settings.git ~/.tools/system_settings
 cd ~/.tools/system_settings/dotfiles
-sudo chmod u+x install.sh
-sudo ./install.sh
+chmod +x install.sh
+./install.sh
 
 # Install Vim Plug and Vim Plugins
+sudo apt-get -y install fonts-powerline
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim -c "PlugInstall"
 
@@ -371,7 +380,6 @@ vim -c "PlugInstall"
 git clone https://github.com/jimeh/tmux-themepack.git ~/.tmux_themepack
 mkdir ~/.tmux_sensible && cd ~/.tmux_sensible
 wget https://raw.githubusercontent.com/tmux-plugins/tmux-sensible/master/sensible.tmux
-tmux source-file ~/.tmux.conf
 
 echo ""
 echo "################################################################"
