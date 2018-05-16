@@ -1,4 +1,3 @@
-tmux powerline .conf install
 Other zsh plugins
 Other vim plugins
 Change vim indentLine character - show like VSCode
