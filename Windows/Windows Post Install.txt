@@ -1,0 +1,82 @@
+Install Windows first when dualbooting!
+Update Completely
+
+Partition Hard Drive
+    - Disk Management > Create and Format Hard Disk Partitions > Shrink Volume
+    - Shrink as much as possible to fit Linux + EFI + Swap partitions
+
+Change settings
+    - Remove advertising
+    - Change theme to dark and blue icons
+    - Enable Developer Mode
+    - Enable Windows Subsystem for Linux from Windows Options
+    - Remove tiles from Start Menu
+    - Uninstall unnecessary programs
+    - Customize icons that appear on left of start menu (pictures, settings, documents)
+
+Install:
+    General:
+        - Calculator+ from Windows Store
+        - Microsoft Office
+            - Word
+            - Powerpoint
+            - Excel
+            - OneNote
+        - Google Chrome
+        - 7zip
+        - VLC
+        - PDFSam Basic
+        - Slack
+        - PDAnet Desktop
+        - Tixati
+        - Foxit PDF Reader
+    Development:
+        - Git
+        - Visual Studio Code
+        - Cmder Mini
+        - ISO to USB
+        - Java JDK / JRE
+        - Python2 / Python3
+    Virtual Machines:
+        - VirtualBox
+        - VMWare Workstation Player
+        - Vagrant
+        - Bash on Ubuntu on Windows
+    Security:
+        - IDA Pro Freeware
+        - Binary Ninja
+        - HxD
+        - Wireshark
+        - Burp Suite
+        - OWASP ZAP
+        - Audacity
+        - Firefox
+            - Foxyproxy
+            - Cookie Editor
+            - Postman
+            - Vimium
+
+
+Create "Open with HxD" context menu option using registry editor
+    - Navigate to: HKEY_CLASSES_ROOT\*\shell
+    - Create new key "Open with HxD"
+    - Inside that new folder, create key "Command"
+    - Double click "Default" and set value to:
+        C:\Program Files\HxD\HxD.exe "%1"
+    - Double click the "Open with HxD" folder.
+    - Create a new string value and set to:
+        - Name: Icon
+        - Value: C:\Program Files\HxD\HxD.exe, 0
+
+Sync VS Code Settings using "Settings Sync" extension
+Generate SSH keys on Bash on Windows and add to GitHub
+    - https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/
+
+Install vagrant machines using GitHub scripts
+    - Make sure no strict ssh key checking on localhost
+        - sudo vim ~/.ssh/config # It's ok if it doesn't exist. Enter the following:
+            Host 127.0.0.1
+                StrictHostKeyChecking no
+                UserKnownHostsFile=/dev/null
+
+Install GitHub scripts on Bash on Windows
