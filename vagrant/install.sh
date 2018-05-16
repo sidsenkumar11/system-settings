@@ -293,6 +293,15 @@ cd ~/.tools/john/src/john/src
 ./configure --enable-mpi && make -s clean && make -sj4
 sudo ln -s ~/.tools/john/src/john/run/john /usr/local/bin/john
 
+if [ $1 != "windows" ]
+then
+	# Sage Math - takes a while to download - 1.6 GB
+	mkdir ~/.tools/sage && cd ~/.tools/sage
+	wget http://mirrors.mit.edu/sage/linux/64bit/sage-8.2-Ubuntu_16.04-x86_64.tar.bz2
+	tar -xjvf *.tar.bz2
+	sudo ln -s ~/.tools/sage/SageMath/sage /usr/local/bin/sage
+fi
+
 echo ""
 echo "################################################################"
 echo "#################  Installing Z3 Theorem #######################"
@@ -338,8 +347,13 @@ echo "#################   Personal Settings Setup  ###################"
 echo "################################################################"
 echo ""
 
-# Install Hexo
+# Install Hexo for blog
 sudo npm install -g hexo-cli
+
+# Install powerline and tmux sensible
+git clone https://github.com/jimeh/tmux-themepack.git ~/.tmux_themepack
+mkdir ~/.tmux_sensible && cd ~/.tmux_sensible
+wget https://raw.githubusercontent.com/tmux-plugins/tmux-sensible/master/sensible.tmux
 
 # Install zsh, set as default shell, then install oh-my-zsh
 sudo apt-get -y install zsh
@@ -350,7 +364,7 @@ chsh -s $(which zsh)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # Need to exit zsh shell to continue
-ZSH_CUSTOM="$USERNAME/.oh-my-zsh/custom"
+ZSH_CUSTOM="/home/$USERNAME/.oh-my-zsh/custom"
 
 # Zsh Plugins
 git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
@@ -371,15 +385,10 @@ cd ~/.tools/system_settings/dotfiles
 chmod +x install.sh
 ./install.sh
 
-# Install Vim Plug and Vim Plugins
+# Install Vim Plug and Vim Plugins. Need to quit to continue.
 sudo apt-get -y install fonts-powerline
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim -c "PlugInstall"
-
-# Install powerline and tmux sensible
-git clone https://github.com/jimeh/tmux-themepack.git ~/.tmux_themepack
-mkdir ~/.tmux_sensible && cd ~/.tmux_sensible
-wget https://raw.githubusercontent.com/tmux-plugins/tmux-sensible/master/sensible.tmux
 
 echo ""
 echo "################################################################"
@@ -406,6 +415,5 @@ sudo apt-get -y autoclean
 echo ""
 echo "################################################################"
 echo "########################   Finished!  ##########################"
-echo "######## If you feel like it, you can install SAGE MATH ########"
 echo "################################################################"
 echo ""
