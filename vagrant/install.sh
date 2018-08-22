@@ -118,8 +118,8 @@ sudo -H pip install --upgrade urllib3[secure]
 # JDK Update:
 # 	- JDK_URL = URL of the latest JDK package by viewing the source on the Oracle JDK install page
 #	- JDK_NAME = Derived from URL
-JDK_URL="http://download.oracle.com/otn-pub/java/jdk/10.0.1+10/fb4372174a714e6b8c52526dc134031e/jdk-10.0.1_linux-x64_bin.tar.gz"
-JDK_NAME="jdk-10.0.1"
+JDK_URL="http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/jdk-10.0.2_linux-x64_bin.tar.gz"
+JDK_NAME="jdk-10.0.2"
 
 # Install Java
 sudo mkdir /opt/java && cd /opt/java
