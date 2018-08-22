@@ -602,7 +602,7 @@
 					<value name="GuiArgs" type="string" data='/dir %CD% /icon "%USERPROFILE%\AppData\Local\lxss\bash.ico"'/>
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
-					<value name="Cmd1" type="string" data='set "PATH=%ConEmuBaseDirShort%\wsl;%PATH%" &amp; %ConEmuBaseDirShort%\conemu-cyg-64.exe --wsl -cur_console:pm:/mnt'/>
+					<value name="Cmd1" type="string" data='set "PATH=%ConEmuBaseDirShort%\wsl;%PATH%" &amp; %ConEmuBaseDirShort%\conemu-cyg-64.exe --wsl -cur_console:pm:/mnt -new_console:d:C:\Users\pikah\Desktop '/>
 				</key>
 				<key name="Task2" modified="2018-08-21 22:19:36" build="180206">
 					<value name="Name" type="string" data="{cmd::Cmder as Admin}"/>
