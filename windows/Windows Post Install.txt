@@ -68,6 +68,10 @@ Create "Open with HxD" context menu option using registry editor
         - Name: Icon
         - Value: C:\Program Files\HxD\HxD.exe, 0
 
+Create "Cmder Here" context menu option
+    - See https://github.com/cmderdev/cmder#context-menu-integration
+    - cd into cmder directory in admin cmd.exe, run `.\cmder.exe /REGISTER ALL`
+
 Sync VS Code Settings using "Settings Sync" extension
 Generate SSH keys on Bash on Windows and add to GitHub
     - https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/
