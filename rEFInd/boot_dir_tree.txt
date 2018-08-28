@@ -1,0 +1,296 @@
+boot/
+├── arch
+│   ├── initramfs-linux-fallback.img
+│   ├── initramfs-linux.img
+│   ├── intel-ucode.img
+│   ├── refind_linux.conf
+│   └── vmlinuz-linux
+└── EFI
+    ├── Boot
+    │   └── bootx64.efi
+    ├── EFI
+    ├── Microsoft
+    │   ├── Boot
+    │   │   ├── BCD
+    │   │   ├── BCD.LOG
+    │   │   ├── bg-BG
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   └── bootmgr.efi.mui
+    │   │   ├── bootmgfw.efi
+    │   │   ├── bootmgr.efi
+    │   │   ├── bootstat.dat
+    │   │   ├── boot.stl
+    │   │   ├── cs-CZ
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   ├── bootmgr.efi.mui
+    │   │   │   └── memtest.efi.mui
+    │   │   ├── da-DK
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   ├── bootmgr.efi.mui
+    │   │   │   └── memtest.efi.mui
+    │   │   ├── de-DE
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   ├── bootmgr.efi.mui
+    │   │   │   └── memtest.efi.mui
+    │   │   ├── el-GR
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   ├── bootmgr.efi.mui
+    │   │   │   └── memtest.efi.mui
+    │   │   ├── en-GB
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   └── bootmgr.efi.mui
+    │   │   ├── en-US
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   ├── bootmgr.efi.mui
+    │   │   │   └── memtest.efi.mui
+    │   │   ├── es-ES
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   ├── bootmgr.efi.mui
+    │   │   │   └── memtest.efi.mui
+    │   │   ├── es-MX
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   └── bootmgr.efi.mui
+    │   │   ├── et-EE
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   └── bootmgr.efi.mui
+    │   │   ├── fi-FI
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   ├── bootmgr.efi.mui
+    │   │   │   └── memtest.efi.mui
+    │   │   ├── Fonts
+    │   │   │   ├── chs_boot.ttf
+    │   │   │   ├── cht_boot.ttf
+    │   │   │   ├── jpn_boot.ttf
+    │   │   │   ├── kor_boot.ttf
+    │   │   │   ├── malgun_boot.ttf
+    │   │   │   ├── malgunn_boot.ttf
+    │   │   │   ├── meiryo_boot.ttf
+    │   │   │   ├── meiryon_boot.ttf
+    │   │   │   ├── msjh_boot.ttf
+    │   │   │   ├── msjhn_boot.ttf
+    │   │   │   ├── msyh_boot.ttf
+    │   │   │   ├── msyhn_boot.ttf
+    │   │   │   ├── segmono_boot.ttf
+    │   │   │   ├── segoen_slboot.ttf
+    │   │   │   ├── segoe_slboot.ttf
+    │   │   │   └── wgl4_boot.ttf
+    │   │   ├── fr-CA
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   └── bootmgr.efi.mui
+    │   │   ├── fr-FR
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   ├── bootmgr.efi.mui
+    │   │   │   └── memtest.efi.mui
+    │   │   ├── hr-HR
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   └── bootmgr.efi.mui
+    │   │   ├── hu-HU
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   ├── bootmgr.efi.mui
+    │   │   │   └── memtest.efi.mui
+    │   │   ├── it-IT
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   ├── bootmgr.efi.mui
+    │   │   │   └── memtest.efi.mui
+    │   │   ├── ja-JP
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   ├── bootmgr.efi.mui
+    │   │   │   └── memtest.efi.mui
+    │   │   ├── kd_02_10df.dll
+    │   │   ├── kd_02_10ec.dll
+    │   │   ├── kd_02_1137.dll
+    │   │   ├── kd_02_14e4.dll
+    │   │   ├── kd_02_15b3.dll
+    │   │   ├── kd_02_1969.dll
+    │   │   ├── kd_02_19a2.dll
+    │   │   ├── kd_02_1af4.dll
+    │   │   ├── kd_02_8086.dll
+    │   │   ├── kd_07_1415.dll
+    │   │   ├── kd_0C_8086.dll
+    │   │   ├── kdstub.dll
+    │   │   ├── ko-KR
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   ├── bootmgr.efi.mui
+    │   │   │   └── memtest.efi.mui
+    │   │   ├── lt-LT
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   └── bootmgr.efi.mui
+    │   │   ├── lv-LV
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   └── bootmgr.efi.mui
+    │   │   ├── memtest.efi
+    │   │   ├── nb-NO
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   ├── bootmgr.efi.mui
+    │   │   │   └── memtest.efi.mui
+    │   │   ├── nl-NL
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   ├── bootmgr.efi.mui
+    │   │   │   └── memtest.efi.mui
+    │   │   ├── pl-PL
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   ├── bootmgr.efi.mui
+    │   │   │   └── memtest.efi.mui
+    │   │   ├── pt-BR
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   ├── bootmgr.efi.mui
+    │   │   │   └── memtest.efi.mui
+    │   │   ├── pt-PT
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   ├── bootmgr.efi.mui
+    │   │   │   └── memtest.efi.mui
+    │   │   ├── qps-ploc
+    │   │   │   └── memtest.efi.mui
+    │   │   ├── Resources
+    │   │   │   ├── bootres.dll
+    │   │   │   └── en-US
+    │   │   │       └── bootres.dll.mui
+    │   │   ├── ro-RO
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   └── bootmgr.efi.mui
+    │   │   ├── ru-RU
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   ├── bootmgr.efi.mui
+    │   │   │   └── memtest.efi.mui
+    │   │   ├── sk-SK
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   └── bootmgr.efi.mui
+    │   │   ├── sl-SI
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   └── bootmgr.efi.mui
+    │   │   ├── sr-Latn-RS
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   └── bootmgr.efi.mui
+    │   │   ├── sv-SE
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   ├── bootmgr.efi.mui
+    │   │   │   └── memtest.efi.mui
+    │   │   ├── tr-TR
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   ├── bootmgr.efi.mui
+    │   │   │   └── memtest.efi.mui
+    │   │   ├── uk-UA
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   └── bootmgr.efi.mui
+    │   │   ├── winsipolicy.p7b
+    │   │   ├── zh-CN
+    │   │   │   ├── bootmgfw.efi.mui
+    │   │   │   ├── bootmgr.efi.mui
+    │   │   │   └── memtest.efi.mui
+    │   │   └── zh-TW
+    │   │       ├── bootmgfw.efi.mui
+    │   │       ├── bootmgr.efi.mui
+    │   │       └── memtest.efi.mui
+    │   └── Recovery
+    │       ├── BCD
+    │       ├── BCD.LOG
+    │       ├── BCD.LOG1
+    │       └── BCD.LOG2
+    ├── refind
+    │   ├── BOOT.CSV
+    │   ├── keys
+    │   ├── refind.conf
+    │   ├── refind.conf-sample
+    │   ├── refind_x64.efi
+    │   └── themes
+    │       └── dm-refind-theme
+    │           ├── background.png
+    │           ├── icons
+    │           │   ├── arrow_left.png
+    │           │   ├── arrow_right.png
+    │           │   ├── bg.png
+    │           │   ├── func_about.png
+    │           │   ├── func_csr_rotate.png
+    │           │   ├── func_exit.png
+    │           │   ├── func_firmware.png
+    │           │   ├── func_hidden.png
+    │           │   ├── func_reset.png
+    │           │   ├── func_shutdown.png
+    │           │   ├── os_altlinux.png
+    │           │   ├── os_android.png
+    │           │   ├── os_antergos.png
+    │           │   ├── os_apricity.png
+    │           │   ├── os_arch.png
+    │           │   ├── os_cent.png
+    │           │   ├── os_chakra.png
+    │           │   ├── os_chrome.png
+    │           │   ├── os_clover.png
+    │           │   ├── os_core.png
+    │           │   ├── os_crunchbang.png
+    │           │   ├── os_debian.png
+    │           │   ├── os_deepin.png
+    │           │   ├── os_elementary.png
+    │           │   ├── os_fatdog.png
+    │           │   ├── os_fedora.png
+    │           │   ├── os_freebsd.png
+    │           │   ├── os_frugalware.png
+    │           │   ├── os_gentoo.png
+    │           │   ├── os_ghostbsd.png
+    │           │   ├── os_goofiboot.png
+    │           │   ├── os_gummiboot.png
+    │           │   ├── os_haiku.png
+    │           │   ├── os_hwtest.png
+    │           │   ├── os_kali.png
+    │           │   ├── os_kubuntu.png
+    │           │   ├── os_legacy.png
+    │           │   ├── os_linuxmint.png
+    │           │   ├── os_linux.png
+    │           │   ├── os_lubuntu.png
+    │           │   ├── os_mac_alt.png
+    │           │   ├── os_mac.png
+    │           │   ├── os_mageia.png
+    │           │   ├── os_mandriva.png
+    │           │   ├── os_manjaro.png
+    │           │   ├── os_neon.png
+    │           │   ├── os_network.png
+    │           │   ├── os_openbsd.png
+    │           │   ├── os_openmandriva.png
+    │           │   ├── os_opensuse.png
+    │           │   ├── os_parabola.png
+    │           │   ├── os_pcbsd.png
+    │           │   ├── os_pclinuxos.png
+    │           │   ├── os_phoenixos.png
+    │           │   ├── os_puppy.png
+    │           │   ├── os_redhat.png
+    │           │   ├── os_refind.png
+    │           │   ├── os_refit.png
+    │           │   ├── os_remixos.png
+    │           │   ├── os_rosa.png
+    │           │   ├── os_sabayon.png
+    │           │   ├── os_slackware.png
+    │           │   ├── os_solus.png
+    │           │   ├── os_steam.png
+    │           │   ├── os_suse.png
+    │           │   ├── os_systemd-boot.png
+    │           │   ├── os_tails.png
+    │           │   ├── os_ubuntubudgie.png
+    │           │   ├── os_ubuntugnome_alt.png
+    │           │   ├── os_ubuntugnome.png
+    │           │   ├── os_ubuntumate.png
+    │           │   ├── os_ubuntu.png
+    │           │   ├── os_unknown.png
+    │           │   ├── os_win8.png
+    │           │   ├── os_windows.png
+    │           │   ├── os_win.png
+    │           │   ├── os_xubuntu.png
+    │           │   ├── os_zorin.png
+    │           │   ├── selection-big.png
+    │           │   ├── selection-small.png
+    │           │   ├── tool_apple_rescue.png
+    │           │   ├── tool_fwupdate.png
+    │           │   ├── tool_memtest.png
+    │           │   ├── tool_mok_tool.png
+    │           │   ├── tool_netboot.png
+    │           │   ├── tool_part.png
+    │           │   ├── tool_rescue.png
+    │           │   ├── tool_shell.png
+    │           │   ├── tool_windows_rescue.png
+    │           │   ├── vol_external.png
+    │           │   ├── vol_internal.png
+    │           │   ├── vol_net.png
+    │           │   └── vol_optical.png
+    │           ├── selection-big.png
+    │           └── selection-small.png
+    └── tools
+
+52 directories, 241 files
