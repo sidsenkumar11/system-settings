@@ -222,7 +222,8 @@ cd ~/.tools/ROPgadget
 sudo python setup.py install
 
 # Install One Gadget
-gem install one_gadget
+sudo gem install one_gadget
+sudo gem install zsteg
 
 # Install Intel PIN
 sudo mkdir /opt/pin && cd /opt/pin
