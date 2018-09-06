@@ -143,6 +143,9 @@ export PATH=$PATH:/opt/java/"$JDK_NAME"/bin:/opt/java/"$JDK_NAME"/jre/bin
 # Install golang
 sudo apt-get -y install golang
 
+# Install Ruby
+sudo apt-get -y install ruby-full
+
 # Install Scala
 echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2EE0EA64E40A89B84B2DF73499E82A75642AC823
@@ -213,6 +216,9 @@ deactivate
 git clone https://github.com/JonathanSalwan/ROPgadget ~/.tools/ROPgadget
 cd ~/.tools/ROPgadget
 sudo python setup.py install
+
+# Install One Gadget
+gem install one_gadget
 
 # Install Intel PIN
 sudo mkdir /opt/pin && cd /opt/pin
