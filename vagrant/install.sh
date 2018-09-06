@@ -93,6 +93,10 @@ sudo apt-get -y install tree
 # Ranger and tools that allow Ranger file previews
 sudo apt-get -y install ranger caca-utils highlight atool w3m poppler-utils mediainfo
 
+# Replace netcat-bsd with netcat-traditional
+sudo apt-get -y install netcat-traditional
+sudo apt-get -y remove netcat-openbsd
+
 echo ""
 echo "################################################################"
 echo "#################    Programming Languages  ####################"
