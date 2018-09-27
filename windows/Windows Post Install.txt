@@ -27,6 +27,7 @@ Install:
         - VLC
         - PDFSam Basic
         - Slack
+        - Android USB Drivers
         - PDAnet Desktop
         - Tixati
         - Foxit PDF Reader
