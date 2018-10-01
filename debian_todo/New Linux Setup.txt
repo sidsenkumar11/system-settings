@@ -1,0 +1,105 @@
+Change gedit's default theme.
+    - Open Gedit
+    - Edit > Preferences > Fonts & Colors > Cobalt
+
+Change Firefox's default search engine
+    - Open Firefox
+    - Hamburger > Preferences > Search > Find more Search Engines
+    - Bottom of page, click Google Icon
+
+Touchpad
+    - Settings > Mouse and Touchpad > Touchpad
+    - General > Tap to click [OFF]
+    - Enable Reverse scrolling direction
+    - Enable Horizontal Scrolling
+
+Clock
+    - Right click time on bar
+    - Date & Time settings
+    - Format > Use 24h clock [OFF]
+    - Display date
+    - Display seconds
+
+Firefox
+    - Preferences > General > Home page = https://www.cyberscoop.com/
+    - "" > General > Browsing > Use smooth scrolling [OFF]
+    - "" > General > Files and Applications > Downloads > Always ask you where to save files
+    - "" > Privacy & Security > Firefox Data Collection and Use > Don't allow Firefox
+    - Preferences > General > Default Browser
+    - Plugins
+        - Foxyproxy (after installing, add Burp proxy)
+        - Edit This Cookie
+        - Vimium
+        - AdBlock
+        - Dark theme contrast
+        - Onetab
+
+Download True Key
+    - Via the main website (https://www.truekey.com/)
+
+Download Burp Suite
+
+Download Wireshark
+    - sudo apt-get -y install wireshark
+
+Download new terminal
+
+Download virtualbox and vmware
+
+Download vagrant
+
+Download wine
+
+Download IDA and Binja
+
+Install John The Ripper Jumbo
+
+sudo -H pip install setuptools
+sudo -H pip3 install setuptools
+https://github.com/jimeh/tmux-themepack
+
+
+Remove powerline from tmux init script
+use tmux install manager
+
+sudo apt-get -y install foremost
+
+Download terminal
+    - Terminator
+    - Change select on copy setting
+    - Install inconsolata font and use that
+    - Set color theme
+    - Disable paste highlighting
+    - Set ctrl+alt+t to terminator
+
+Install reFind again to make it actually work
+
+sudo apt-add-repository ppa:rodsmith/refind
+sudo apt-get update
+sudo apt-get -y install refind
+
+Install Nautilus File Browser
+Paper Icons
+Change Cinnamon theme - Ark Dark
+
+Set up vagrant VM (CTF)
+
+Set grub time to 0
+
+sudo apt-get -y install exiftool nmap
+
+stegsolve
+zsteg
+
+sudo apt-get -y install netcat-traditional
+sudo update-alternatives --config nc
+
+Install Sage
+Add SSH Key to GitHub
+
+Steghide
+
+Install hugo from source
+
+sudo apt-get -y install ruby-full
+gem install one_gadget
