@@ -5,6 +5,7 @@
     ui = true
 [core]
     editor = vim
+    autocrlf = false
 [credentials]
     helper = cached --timeout=9999999999
 [push]
