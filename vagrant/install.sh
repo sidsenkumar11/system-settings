@@ -119,6 +119,9 @@ sudo -H pip install virtualenv
 # Fix urllib3 InsecurePlatformWarning
 sudo -H pip install --upgrade urllib3[secure]
 
+# Add virtualenvwrapper script
+sudo pip install virtualenvwrapper
+
 # JDK Update:
 # 	- JDK_URL = URL of the latest JDK package by viewing the source on the Oracle JDK install page
 #	- JDK_NAME = Derived from URL
